@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Người dùng - Thông tin đơn hàng</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f2f2;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .info {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+
+    .status {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #007bff;
+    }
+
+    .image-preview img {
+      max-width: 100%;
+      margin-top: 20px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Thông tin đơn hàng</h2>
+    <div class="status" id="statusText">Đang tải...</div>
+    <div class="info" id="buyerText"></div>
+    <div class="info" id="emailText"></div>
+    <div class="info" id="phoneText"></div>
+    <div class="info" id="addressText"></div>
+    <div class="info" id="timeText"></div>
+    <div class="image-preview" id="imagePreview"></div>
+  </div>
+
+  <script>
+    function loadNotification() {
+      const saved = localStorage.getItem('orderNotification');
+      if (saved) {
+        const data = JSON.parse(saved);
+
+        const statusMap = {
+          pending: "Đơn hàng đang được xử lý.",
+          shipped: "Đơn hàng đã được giao.",
+          cancelled: "Đơn hàng đã bị hủy."
+        };
+
+        document.getElementById('statusText').textContent = statusMap[data.status] || "Không xác định.";
+        document.getElementById('buyerText').textContent = `Người mua: ${data.buyerName}`;
+        document.getElementById('emailText').textContent = `Gmail: ${data.email}`;
+        document.getElementById('phoneText').textContent = `Số điện thoại: ${data.phone}`;
+        document.getElementById('addressText').textContent = `Địa chỉ: ${data.address}`;
+        document.getElementById('timeText').textContent = `Cập nhật lúc: ${data.updatedAt}`;
+
+        if (data.productImage) {
+          document.getElementById('imagePreview').innerHTML = `<img src="${data.productImage}" alt="Ảnh sản phẩm">`;
+        } else {
+          document.getElementById('imagePreview').innerHTML = '';
+        }
+      } else {
+        document.getElementById('statusText').textContent = "Chưa có thông tin đơn hàng.";
+      }
+    }
+
+    window.onload = loadNotification;
+    setInterval(loadNotification, 5000); // Tự động cập nhật mỗi 5 giây
+  </script>
+</body>
+</html>

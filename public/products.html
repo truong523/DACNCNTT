@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/54f0cb7e4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Thế Giới Di Động</title>
+  <title>Kết quả tìm kiếm sản phẩm</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f1f1f4;
+      color: #f0f0f0;
+    }
+
+    h2 {
+      text-align: center;
+      color: #20201f;
+      margin-bottom: 30px;
+    }
+
+   ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* tăng rộng hơn */
+  gap: 20px;
+}
+
+    li {
+      margin: 0;
+    }
+
+    .product-card {
+      border: 2px solid #5c17d6;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f0f0f4;
+      box-shadow: 0 6px 15px rgba(232, 232, 244, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+    }
+
+   .product-card img {
+  width: 100%;
+  height: 200px;  /* tăng chiều cao ảnh */
+  object-fit: contain; /* không cắt ảnh, giữ tỉ lệ */
+  background-color: #f2f2f6; /* nền ảnh tránh khoảng trống trắng */
+  border-bottom: 1px solid #f0f0f0;
+}
+    .info {
+      padding: 12px;
+    }
+
+    .info h3 {
+      font-size: 18px;
+      margin: 0 0 8px;
+      color: #171716;
+    }
+
+    .info p {
+      font-size: 14px;
+      color: #090909;
+    }
+
+    .no-results {
+      text-align: center;
+      font-size: 16px;
+      padding: 20px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h2>Kết quả tìm kiếm</h2>
+  <ul id="results"></ul>
+
+  <script>
+    const resultsList = document.getElementById('results');
+
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    async function loadSearchResults() {
+      const query = getQueryParam('q');
+      if (!query) {
+        resultsList.innerHTML = '<div class="no-results">Vui lòng nhập từ khóa tìm kiếm.</div>';
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:3000/search?q=${encodeURIComponent(query)}`);
+        if (!res.ok) throw new Error('Lỗi kết nối tới server');
+
+        const data = await res.json();
+
+        if (data.count === 0 || !data.results.length) {
+          resultsList.innerHTML = '<div class="no-results">Không tìm thấy sản phẩm phù hợp.</div>';
+          return;
+        }
+
+        resultsList.innerHTML = '';
+        data.results.forEach(product => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <div class="product-card">
+              <img src="${product.image}" alt="${product.name}">
+              <div class="info">
+                <h3>${product.name}</h3>
+                <p>${product.description || ''}</p>
+              </div>
+            </div>
+          `;
+          resultsList.appendChild(li);
+        });
+      } catch (error) {
+        resultsList.innerHTML = `<div class="no-results">Lỗi khi tìm kiếm: ${error.message}</div>`;
+      }
+    }
+
+    loadSearchResults();
+  </script>
+</body>
+</html>

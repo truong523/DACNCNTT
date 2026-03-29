@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đăng nhập / Đăng ký</title>
+  <style>
+    /* Popup style */
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 999;
+    }
+    .popup {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      width: 360px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .popup h2 {
+      color: #e60012;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .close-btn {
+      position: absolute;
+      top: 8px; right: 12px;
+      background: none; border: none;
+      font-size: 20px; cursor: pointer;
+    }
+
+    /* Form styles */
+    .form-container {
+      max-width: 360px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .form-container h3 {
+      margin-bottom: 15px;
+      color: #e60012;
+      font-weight: bold;
+      text-align: center;
+    }
+    .form-container input[type="text"],
+    .form-container input[type="password"],
+    .form-container input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .form-container button {
+      width: 100%;
+      background: #e60012;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .form-message {
+      color: red;
+      text-align: center;
+      margin-top: 8px;
+      min-height: 18px;
+    }
+    .toggle-link {
+      text-align: center;
+      margin-top: 12px;
+      cursor: pointer;
+      color: #e60012;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup">
+      <button class="close-btn" onclick="closePopup()">×</button>
+      <h2>Smember</h2>
+      <img src="srobot.png" alt="Smember Mascot" style="width:80px;margin:10px 0;">
+      <p>Vui lòng đăng nhập tài khoản Smember để<br> xem ưu đãi và thanh toán dễ dàng hơn.</p>
+      <div style="display:flex; justify-content: space-between;">
+        <button style="border: 2px solid #e60012; background:#fff; color:#e60012; padding:10px 20px; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="showRegister()">Đăng ký</button>
+        <button style="background: linear-gradient(to right, #ff5e5e, #e60012); color:#fff; padding:10px 20px; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" onclick="closePopup()">Đăng nhập</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Đăng nhập -->
+  <div class="form-container" id="loginForm" style="display:none;">
+    <h3>Đăng nhập</h3>
+    <input type="text" id="login-username" placeholder="Tài khoản" />
+    <input type="password" id="login-password" placeholder="Mật khẩu" />
+    <button onclick="login()">Đăng nhập</button>
+    <div class="form-message" id="loginMessage"></div>
+    <div class="toggle-link" onclick="showRegister()">Bạn chưa có tài khoản? Đăng ký</div>
+    <div class="toggle-link" onclick="showForgot()">Quên mật khẩu?</div>
+  </div>
+
+  <!-- Đăng ký -->
+  <div class="form-container" id="registerForm" style="display:none;">
+    <h3>Đăng ký tài khoản mới</h3>
+    <input type="text" id="reg-username" placeholder="Tài khoản" />
+    <input type="password" id="reg-password" placeholder="Mật khẩu" />
+    <input type="email" id="reg-email" placeholder="Gmail" />
+    <input type="text" id="reg-maNV" placeholder="Mã nhân viên (nếu là admin)" />
+    <button onclick="register()">Đăng ký</button>
+    <div class="form-message" id="registerMessage"></div>
+    <div class="toggle-link" onclick="showLogin()">Bạn đã có tài khoản? Đăng nhập</div>
+  </div>
+
+  <!-- Quên mật khẩu -->
+  <div class="form-container" id="forgotForm" style="display:none;">
+    <h3>Quên mật khẩu</h3>
+    <input type="email" id="forgot-email" placeholder="Nhập email đã đăng ký" />
+    <button onclick="recoverPassword()">Lấy lại mật khẩu</button>
+    <div class="form-message" id="forgotMessage"></div>
+    <div class="toggle-link" onclick="showLogin()">Quay lại đăng nhập</div>
+  </div>
+
+<script>
+  // Danh sách mã nhân viên admin hợp lệ
+  const validEmployeeCodes = ["NV001", "NV002", "ADMIN123"];
+
+  window.onload = () => {
+    document.getElementById("popup").style.display = "flex";
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    showLogin();
+  }
+
+  function showRegister() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("forgotForm").style.display = "none";
+    document.getElementById("registerForm").style.display = "block";
+    clearMessages();
+  }
+
+  function showLogin() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("registerForm").style.display = "none";
+    document.getElementById("forgotForm").style.display = "none";
+    document.getElementById("loginForm").style.display = "block";
+    clearMessages();
+  }
+
+  function showForgot() {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("registerForm").style.display = "none";
+    document.getElementById("forgotForm").style.display = "block";
+    clearMessages();
+  }
+
+  function clearMessages() {
+    document.getElementById("loginMessage").textContent = "";
+    document.getElementById("registerMessage").textContent = "";
+    document.getElementById("forgotMessage").textContent = "";
+    // Reset màu chữ mặc định cho message khôi phục mật khẩu
+    document.getElementById("forgotMessage").style.color = "red";
+  }
+
+  function register() {
+    const u = document.getElementById("reg-username").value.trim();
+    const p = document.getElementById("reg-password").value.trim();
+    const email = document.getElementById("reg-email").value.trim();
+    const maNV = document.getElementById("reg-maNV").value.trim();
+    const msg = document.getElementById("registerMessage");
+
+    if (!u || !p || !email) {
+      msg.textContent = "Vui lòng nhập đầy đủ tài khoản, mật khẩu và Gmail.";
+      return;
+    }
+
+    let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+
+    if (accounts.find(acc => acc.username === u)) {
+      msg.textContent = "Tài khoản đã tồn tại.";
+      return;
+    }
+
+    // Xác định role dựa trên mã nhân viên có hợp lệ hay không
+    let role = "user";
+    if (maNV) {
+      if (validEmployeeCodes.includes(maNV)) {
+        role = "admin";
+      } else {
+        msg.textContent = "Mã nhân viên không hợp lệ.";
+        return;
+      }
+    }
+
+    const account = { username: u, password: p, email, role };
+    if (role === "admin") {
+      account.maNV = maNV;
+    }
+
+    accounts.push(account);
+    localStorage.setItem("accounts", JSON.stringify(accounts));
+    alert("Đăng ký thành công!");
+    showLogin();
+  }
+
+  function login() {
+    const u = document.getElementById("login-username").value.trim();
+    const p = document.getElementById("login-password").value.trim();
+    const msg = document.getElementById("loginMessage");
+
+    if (!u || !p) {
+      msg.textContent = "Vui lòng nhập tài khoản và mật khẩu.";
+      return;
+    }
+
+    let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+    const user = accounts.find(acc => acc.username === u && acc.password === p);
+
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+      alert("Đăng nhập thành công!");
+
+      if (user.role === "admin") {
+        window.location.href = "admin.html";
+      } else {
+        window.location.href = "user.html";
+      }
+    } else {
+      msg.textContent = "Sai tài khoản hoặc mật khẩu.";
+    }
+  }
+
+  function recoverPassword() {
+    const email = document.getElementById("forgot-email").value.trim();
+    const msg = document.getElementById("forgotMessage");
+
+    if (!email) {
+      msg.textContent = "Vui lòng nhập email.";
+      return;
+    }
+
+    let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+    const user = accounts.find(acc => acc.email === email);
+
+    if (user) {
+      msg.style.color = "green";
+      msg.textContent = `Mật khẩu của bạn là: ${user.password}`;
+    } else {
+      msg.style.color = "red";
+      msg.textContent = "Không tìm thấy tài khoản với email này.";
+    }
+  }
+</script>
+
+</body>
+</html>
+
+  // let thumbs = document.querySelectorAll(".thumb-img");
+  // let currentIndex = 0;
+
+  // function autoChangeImage() {
+  //   thumbs[currentIndex].click(); // gọi lại changeImage(this)
+
+  //   currentIndex++;
+  //   if (currentIndex >= thumbs.length) {
+  //     currentIndex = 0;
+  //   }
+  // }
+
+  // // Bắt đầu auto chạy sau 3 giây và lặp lại mỗi 3 giây
+  // setInterval(autoChangeImage, 1500);

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản lý sản phẩm</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <h1>Trang Quản Trị</h1>
+   
+  
+  <button onclick="goHome()">🏠 Quay về trang chủ</button>
+  <button onclick="logout()">Đăng xuất</button>
+  <button onclick="window.location.href='QLKH.html'">Quản lý khách hàng</button>
+  <button onclick="window.location.href='DonHang/admidh.html'">Quản lý Đơn Hàng</button>
+  <button onclick="window.location.href='/ThongKe.html'">Thống Kê</button>
+  <button onclick="window.location.href='Chucnang/DauGia.html'">Đấu Giá</button>
+ 
+
+  <h2>Thêm / Cập nhật sản phẩm</h2>
+  <!-- Form nhập liệu -->
+  <div id="product-form">
+    <input type="text" id="product-name" placeholder="Tên sản phẩm">
+    <input type="number" id="product-price" placeholder="Giá sản phẩm">
+    <input type="file" id="product-image" accept="image/*">
+    <textarea id="product-description" placeholder="Nội dung mô tả"></textarea>
+
+    <!-- Nút Thêm và Cập nhật sản phẩm -->
+    <button id="add-button" onclick="addProduct()">Thêm sản phẩm</button>
+    <button id="update-button" onclick="updateProduct()" style="display: none;">Cập nhật sản phẩm</button>
+
+    
+
+     
+    <!-- Phần trăm giảm giá của sản phẩm -->
+    <input type="number" id="product-discount" placeholder="Giảm giá (%)" min="0" max="100">
+    
+    <!-- Đánh giá sao -->
+    <!-- <label for="product-rating">Đánh giá (0 - 5 sao):</label>
+    <input type="number" id="product-rating" min="0" max="5" step="0.5"> -->
+
+
+  </div>
+
+  <h2>Danh sách sản phẩm</h2>
+  <div id="admin-product-list"></div>
+
+  <script>
+  function goHome() {
+    window.location.href = "index.html"; // Đổi thành đường dẫn thực tế của trang chủ
+  }
+</script>
+
+
+  <script src="login.js"></script>
+</body>
+</html>

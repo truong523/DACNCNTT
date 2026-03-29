@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Group Chat</title>
+  <link rel="stylesheet" href="GroupBox.css">
+</head>
+<body>
+  <div class="group-chat-container">
+
+    <aside class="group-list">
+      <h2>Nhóm</h2>
+      <ul>
+        <li class="group active">💬 Mua bán iPhone</li>
+        <li class="group">💻 Giao lưu laptop</li>
+        <li class="group">⌚ Đồng hồ chính hãng</li>
+      </ul>
+    </aside>
+
+    <main class="chat-box">
+      <header class="chat-header">
+        <h3>💬 Mua bán iPhone</h3>
+        <p>Thành viên: Nam, Huy, Lan</p>
+      </header>
+
+      <section class="chat-messages" id="messages">
+      <div class="message from-them">
+  <strong>Lan:</strong> Mình có máy 128GB màu đen nhé! <br>
+  <a href="https://phukiengiaxuong.com.vn/cdn/images/202207/source_img/titan-kim-cuong-9.jpg target=" target="_blank ">
+    Xem sản phẩm
+  </a><br>
+  <img src="https://tse1.mm.bing.net/th?id=OIP.6F-qkpwOaoyxjEZLEM54hQHaJ4&pid=Api&P=0&h=180" alt="iPhone 14 Pro" width="150">
+</div>  
+
+<div class="message from-them">
+  <strong>Minh:</strong> Mình cũng có iPhone 13 Pro giá tốt <br>
+  <a href="https://tse1.mm.bing.net/th?id=OIP.6F-qkpwOaoyxjEZLEM54hQHaJ4&pid=Api&P=0&h=180" target="_blank">
+    Xem sản phẩm
+  </a><br>
+  <img src="https://phukiengiaxuong.com.vn/cdn/images/202207/source_img/titan-kim-cuong-9.jpg" alt="iPhone 13 Pro" width="150">
+</div>
+        <div class="message from-me"><strong>Mobile X:</strong>Dạ shop em còn ạ!</div>
+      </section>
+
+      <footer class="chat-input">
+        <input type="text" id="chatInput" placeholder="Nhập tin nhắn...">
+        <button onclick="sendMessage()">Gửi</button>
+      </footer>
+    </main>
+
+  </div>
+
+  <script src="GroupBox.js"></script>
+</body>
+</html>

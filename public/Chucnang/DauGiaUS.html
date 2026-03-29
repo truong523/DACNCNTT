@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Đấu Giá Siêu Cấp</title>
+  <link rel="stylesheet" href="DauGiaUS.css" />
+</head>
+<body>
+  <div class="auction-container">
+    <aside class="sidebar">
+      <ul>
+        <div class="back-button">
+          <button onclick="goBack()">← Về trang chủ</button>
+        </div>
+        <li class="tab active" data-tab="IP">iPhone</li>
+        <li class="tab active" data-tab="SS">Samsung</li>
+        <li class="tab active" data-tab="LT">Laptop</li>
+        <li class="tab active" data-tab="PK">Phụ kiện</li>
+      </ul>
+    </aside>
+    <main class="content">
+      <h1>Đấu Giá Siêu Cấp</h1>
+
+      <!-- iPhone-->
+      <div class="tab-content active" id="IP">
+        <div class="auction-row">
+          <div class="item-img border-right">
+            <img src="image/avt16pm.jpg" alt="iPhone" />
+          </div>
+          <div class="item-info border-right">
+            <div class="name">iPhone 16 Pro Max</div>
+             <div class="start-price">
+              Bắt đầu: <span class="start-value">1.000.000₫</span><br>
+              Giá hiện tại: <span class="current-value">1.000.000₫</span>
+            </div>
+            <button class="bid-btn">Đấu Giá </button>
+          </div>
+          <div class="buyout border-right">
+            <div class="price">Giá Chốt Ngay: <br>29.999.000₫</div>
+            <button class="buy-btn">Mua Ngay</button>
+          </div>
+          <div class="time-left">
+            <span class="timer" data-time="26700">07:24:17</span>
+            <div class="deadline">Hạn: 22/05/2025 23:59:59</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Samsung -->
+      <div class="tab-content" id="SS">
+        <div class="auction-row">
+          <div class="item-img border-right">
+            <img src="image/avtSS.jpg" alt="Samsung" />
+          </div>
+          <div class="item-info border-right">
+            <div class="name">Galaxy S24 Ultra</div>
+           <div class="start-price">
+              Bắt đầu: <span class="start-value">1.000.000₫</span><br>
+              Giá hiện tại: <span class="current-value">1.000.000₫</span>
+            </div>
+            <button class="bid-btn">Đấu Giá</button>
+          </div>
+          <div class="buyout border-right">
+            <div class="price">Giá Chốt Ngay: <br>26.999.000₫</div>
+            <button class="buy-btn">Mua Ngay</button>
+          </div>
+          <div class="time-left">
+            <span class="timer" data-time="000015">07:24:17</span>
+            <div class="deadline">Hạn: 15/05/2025 21:00:00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Laptop -->
+      <div class="tab-content" id="LT">
+        <div class="auction-row">
+          <div class="item-img border-right">
+            <img src="image/avtlt.png" alt="LT" />
+          </div>
+          <div class="item-info border-right">
+            <div class="name">MacBook Pro 2023 16 inch M3 Max </div>
+             <div class="start-price">
+              Bắt đầu: <span class="start-value">5.000.000₫</span><br>
+              Giá hiện tại: <span class="current-value">5.000.000₫</span>
+            </div>
+            <button class="bid-btn">Đấu Giá</button>
+          </div>
+          <div class="buyout border-right">
+            <div class="price">Giá Chốt Ngay: <br>59.900.000₫</div>
+            <button class="buy-btn">Mua Ngay</button>
+          </div>
+          <div class="time-left">
+            <span class="timer" data-time="585260">07:24:17</span>
+            <div class="deadline">Hạn: 29/05/2025 20:00:00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phu Kien -->
+      <div class="tab-content" id="PK">
+        <div class="auction-row">
+          <div class="item-img border-right">
+            <img src="image/avtpk.jpg" alt="Toro" />
+          </div>
+          <div class="item-info border-right">
+            <div class="name"> Tai Nghe Gaming Dare-U EH469 7.1 RGB - Pink</div>
+              <div class="start-price">
+              Bắt đầu: <span class="start-value">99.000₫</span><br>
+              Giá hiện tại: <span class="current-value">99.000₫</span>
+            </div>
+            <button class="bid-btn">Đấu Giá </button>
+          </div>
+          <div class="buyout border-right">
+            <div class="price">Giá Chốt Ngay: <br>345.000₫</div>
+            <button class="buy-btn">Mua Ngay</button>
+          </div>
+          <div class="time-left">
+            <span class="timer">02:20:30</span>
+            <div class="deadline">Hạn: 22/05/2025 18:00:00</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="DauGiaUS.js"></script>
+</body>
+</html>

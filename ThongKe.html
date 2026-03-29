@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Top sản phẩm bán chạy</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .product {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+    }
+    .product img {
+      width: 60px;
+      height: 60px;
+      margin-right: 15px;
+      object-fit: contain;
+      border-radius: 6px;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Top sản phẩm bán chạy</h1>
+  <label>Lọc theo danh mục:
+    <select id="category">
+      <option value="">Tất cả</option>
+      <option value="Điện thoại">Điện thoại</option>
+      <option value="Laptop">Laptop</option>
+      <option value="iPad">iPad</option>
+      <option value="Phụ kiện">Phụ kiện</option>
+    </select>
+  </label>
+  <label>Từ ngày: <input type="date" id="startDate" /></label>
+  <label>Đến ngày: <input type="date" id="endDate" /></label>
+  <button onclick="loadTopProducts()">Lọc</button>
+
+  <div id="productsList"></div>
+  <canvas id="chartCanvas" width="600" height="300"></canvas>
+
+  <script>
+    async function loadTopProducts() {
+      const category = document.getElementById('category').value;
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+
+      let url = `http://localhost:3000/api/top-products?n=6`;
+      if (category) url += `&category=${encodeURIComponent(category)}`;
+      if (startDate) url += `&startDate=${startDate}`;
+      if (endDate) url += `&endDate=${endDate}`;
+
+      try {
+        const res = await fetch(url);
+        const products = await res.json();
+
+        const list = document.getElementById('productsList');
+        list.innerHTML = '';
+        products.forEach(p => {
+          list.innerHTML += `
+            <div class="product">
+              <img src="${p.image}" alt="${p.name}" onerror="this.onerror=null;this.src='default.jpg';" />
+              <div>
+                <p><strong>${p.name}</strong></p>
+                <p>Loại: ${p.category}</p>
+                <p>Đã bán: ${p.quantitySold}</p>
+              </div>
+            </div>
+          `;
+        });
+
+        const labels = products.map(p => p.name);
+        const data = products.map(p => p.quantitySold);
+        renderChart(labels, data);
+      } catch (err) {
+        console.error('Lỗi:', err);
+      }
+    }
+
+    function renderChart(labels, data) {
+      const ctx = document.getElementById('chartCanvas').getContext('2d');
+      if (window.salesChart) window.salesChart.destroy();
+
+      window.salesChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Số lượng bán',
+            data,
+            backgroundColor: 'rgba(54, 162, 235, 0.6)'
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            title: { display: true, text: 'Thống kê số lượng bán' }
+          },
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+    }
+
+    loadTopProducts();
+  </script>
+</body>
+</html>

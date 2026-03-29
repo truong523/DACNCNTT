@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thanh Toán Đơn Hàng</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .checkout-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .section-title {
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+    .product-summary {
+      background: #f1f1f1;
+      border-radius: 10px;
+      padding: 15px;
+    }
+    #momoButton {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container checkout-container">
+  <h2 class="text-center mb-4">Thanh Toán Đơn Hàng</h2>
+
+  <!-- Thông tin khách hàng -->
+  <div class="mb-4">
+    <h5 class="section-title">1. Thông Tin Khách Hàng</h5>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="fullName" class="form-label">Họ và tên</label>
+        <input type="text" class="form-control" id="fullName" placeholder="Nguyễn Văn A" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="phone" class="form-label">Số điện thoại</label>
+        <input type="tel" class="form-control" id="phone" placeholder="*********" required>
+      </div>
+    </div>
+  </div>
+
+  <!-- Địa chỉ giao hàng -->
+  <div class="mb-4">
+    <h5 class="section-title">2. Địa Chỉ Giao Hàng</h5>
+    <textarea class="form-control" rows="3" id="address" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố" required></textarea>
+  </div>
+
+  <!-- Phương thức thanh toán -->
+  <div class="mb-4">
+    <h5 class="section-title">3. Phương Thức Thanh Toán</h5>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="paymentMethod" id="cod" value="cod" checked>
+      <label class="form-check-label" for="cod">Thanh toán khi nhận hàng (COD)</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="paymentMethod" id="bank" value="bank">
+      <label class="form-check-label" for="bank">Chuyển khoản ngân hàng</label>
+      <div class="ms-4 mt-1 text-muted small d-none" id="bankDetails">
+        Ngân hàng Vietcombank - STK: 123456789 - Chủ TK: Nguyễn Văn A
+      </div>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="paymentMethod" id="momo" value="momo">
+      <label class="form-check-label" for="momo">Thanh toán qua MOMO</label>
+      <div class="ms-4 mt-2 d-none" id="momoDetails">
+        <p class="text-muted small">Số điện thoại MOMO: 0909123456 - Tên: Nguyễn Văn A</p>
+        <button id="momoButton" class="btn btn-warning btn-sm">Thanh toán bằng MOMO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tóm tắt đơn hàng -->
+  <div class="mb-4">
+    <h5 class="section-title">4. Đơn Hàng Của Bạn</h5>
+    <div class="product-summary">
+      <p>📱 	Điện thoại Apple iPhone 16 - 128GB VN/A - <strong>21.790.000₫</strong></p>
+      <p>🎁 Tai nghe Bluetooth - <strong>Miễn phí</strong></p>
+      <hr>
+      <p class="text-end fw-bold">Tổng cộng: <span class="text-danger fs-5">25.990.000₫</span></p>
+    </div>
+  </div>
+
+  <!-- Nút xác nhận -->
+  <div class="text-center">
+    <button class="btn btn-success btn-lg px-5" id="confirmOrder">XÁC NHẬN ĐẶT HÀNG</button>
+  </div>
+</div>
+
+<!-- Modal cảm ơn -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-success w-100" id="successModalLabel">🎉 Đặt hàng thành công!</h5>
+      </div>
+      <div class="modal-body">
+        <p>Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ liên hệ và giao hàng sớm nhất.</p>
+        <a href="index.html" class="btn btn-primary">Tiếp tục mua sắm</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript xử lý -->
+<script>
+  const cod = document.getElementById("cod");
+  const bank = document.getElementById("bank");
+  const momo = document.getElementById("momo");
+
+  const bankDetails = document.getElementById("bankDetails");
+  const momoDetails = document.getElementById("momoDetails");
+  const momoButton = document.getElementById("momoButton");
+  const confirmButton = document.getElementById("confirmOrder");
+
+  function updatePaymentInfo() {
+    bankDetails.classList.toggle("d-none", !bank.checked);
+    momoDetails.classList.toggle("d-none", !momo.checked);
+    momoButton.style.display = momo.checked ? "inline-block" : "none";
+  }
+
+  cod.addEventListener("change", updatePaymentInfo);
+  bank.addEventListener("change", updatePaymentInfo);
+  momo.addEventListener("change", updatePaymentInfo);
+
+  function showSuccessModal() {
+    const modal = new bootstrap.Modal(document.getElementById("successModal"));
+    modal.show();
+  }
+
+  function payMomo() {
+    fetch('http://localhost:3000/create-payment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: 25990000 })
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('Lỗi HTTP ' + res.status);
+      return res.json();
+    })
+    .then(data => {
+      if (data.payUrl) {
+        window.location.href = data.payUrl;
+      } else {
+        alert("Lỗi tạo thanh toán.");
+      }
+    })
+    .catch(err => {
+      alert('Lỗi: ' + err.message);
+      console.error(err);
+    });
+  }
+
+  momoButton.addEventListener("click", payMomo);
+
+  confirmButton.addEventListener("click", () => {
+    const name = document.getElementById("fullName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const payment = document.querySelector("input[name='paymentMethod']:checked").value;
+
+    if (!name || !phone || !address) {
+      alert("Vui lòng điền đầy đủ thông tin.");
+      return;
+    }
+
+    if (payment === "momo") {
+      payMomo();
+    } else {
+      showSuccessModal();
+    }
+  });
+</script>
+
+</body>
+</html>

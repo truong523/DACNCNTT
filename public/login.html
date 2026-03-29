@@ -1,0 +1,172 @@
+<!-- - <!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="login-container">
+    <h1>Đăng nhập</h1>
+    <input type="text" id="username" placeholder="Tài khoản">
+    <input type="password" id="password" placeholder="Mật khẩu">
+    <button onclick="login()">Xác nhận</button>
+    <p id="loginMessage"></p>
+  </div>
+  <script src="login.js"></script>
+  -->
+</body>
+</html> 
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập</title>
+  <link rel="stylesheet" href="login.css">
+ <style>
+  .popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(2px);
+  }
+
+  .popup {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px 25px;
+    width: 400px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+    animation: popup-fade-in 0.3s ease-out;
+  }
+
+  @keyframes popup-fade-in {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .popup h2 {
+    color: #090fd2;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .popup img {
+    width: 80px;
+    height: auto;
+    margin: 10px 0;
+  }
+
+  .popup p {
+    font-size: 15px;
+    margin-bottom: 25px;
+    color: #333;
+  }
+
+  .popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .btn-outline, .btn-fill {
+    flex: 1;
+    padding: 10px 0;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .btn-outline {
+    border: 2px solid #090fd2;
+    background: #fff;
+    color: #090fd2;
+  }
+
+  .btn-outline:hover {
+    background: #f0f3ff;
+  }
+
+  .btn-fill {
+    background: linear-gradient(135deg, #090fd2, #3b48ff);
+    color: white;
+    border: none;
+  }
+
+  .btn-fill:hover {
+    opacity: 0.9;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+    transition: 0.2s;
+  }
+
+  .close-btn:hover {
+    color: #000;
+  }
+</style>
+
+</head>
+<body>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup">
+      <button class="close-btn" onclick="closePopup()">×</button>
+      <h2>Smember</h2>
+      <!-- <img src="srobot.png" alt="Smember Mascot"> -->
+      <p>Vui lòng đăng nhập tài khoản Smember để<br> xem ưu đãi và thanh toán dễ dàng hơn.</p>
+      <div class="popup-buttons">
+        <button class="btn-outline" onclick="redirectToRegister()">Đăng ký</button>
+        <button class="btn-fill" onclick="closePopup()">Đăng nhập</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Giao diện đăng nhập -->
+  <div class="login-container" style="display: none;" id="loginForm">
+    <h1>Đăng nhập</h1>
+    <input type="text" id="username" placeholder="Tài khoản">
+    <input type="password" id="password" placeholder="Mật khẩu">
+    <button onclick="login()">Xác nhận</button>
+    <p id="loginMessage"></p>
+  </div>
+
+  <script src="login.js"></script>
+  <script>
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("loginForm").style.display = "block";
+    }
+
+    function redirectToRegister() {
+      window.location.href = "register.html"; // hoặc liên kết trang đăng ký của bạn
+    }
+
+    // Tùy chọn: mở popup sau khi trang tải
+    window.onload = () => {
+      document.getElementById("popup").style.display = "flex";
+    };
+  </script>
+  
+</body>
+</html>  

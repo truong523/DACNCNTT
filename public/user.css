@@ -1,0 +1,196 @@
+/* body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f2f2f2;
+  padding: 30px;
+  color: #333;
+} */
+
+/* ==== Header người dùng ==== */
+/* .user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+} */
+
+/* ==== Nút đăng xuất ==== */
+/* .logout-btn {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+} */
+
+/* ==== Giỏ hàng ==== */
+/* .cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-size: 16px;
+  z-index: 999;
+} */
+
+/* ==== Tiêu đề sản phẩm ==== */
+/* .section-title {
+  font-size: 22px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #444;
+} */
+
+
+
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+}
+
+.container {
+  display: flex;
+  padding: 20px;
+}
+
+/* Sidebar trái */
+.sidebar {
+  width: 280px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-right: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.sidebar h3 {
+  margin-bottom: 15px;
+}
+
+.menu li {
+  list-style: none;
+  margin: 12px 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 500;
+}
+
+.logout-btn {
+  margin-top: 20px;
+  background: #fff;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #dc3545;
+  color: white;
+}
+
+.loyalty-box {
+  margin-top: 30px;
+  background: #fffbe7;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.loyalty-box .qr {
+  width: 100px;
+  margin: 10px 0;
+}
+
+.app-links img {
+  width: 120px;
+  margin: 5px 0;
+}
+
+/* Nội dung chính */
+.content {
+  flex: 1;
+  background: #fff;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.order-status {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.order-status button {
+  padding: 8px 14px;
+  border: 1px solid #007bff;
+  background: white;
+  border-radius: 6px;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.order-status button:hover {
+  background: #007bff;
+  color: white;
+}
+
+.empty-orders {
+  text-align: center;
+}
+
+.empty-orders img {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.empty-orders .tags button {
+  margin: 5px;
+  padding: 8px 12px;
+  border: 1px solid #007bff;
+  background: white;
+  border-radius: 20px;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.empty-orders .tags button:hover {
+  background: #007bff;
+  color: white;
+}
+
+.home-link {
+  display: block;
+  margin-top: 20px;
+  color: #007bff;
+  text-decoration: none;
+}

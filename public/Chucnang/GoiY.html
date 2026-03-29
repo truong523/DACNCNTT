@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gợi ý sản phẩm điện thoại</title>
+  <link rel="stylesheet" href="GoiY.css" />
+</head>
+<body>
+  <div class="container">
+   <a href="/public/index.html" class="home-button">
+         &#8592; Về trang chủ
+</a>
+
+    <h1>Gợi ý sản phẩm điện thoại</h1>
+              <div class="filters">
+                <select id="brand">
+  <option value="">Chọn hãng</option>
+  <!-- Điện thoại -->
+  <option value="Apple">Apple</option>
+  <option value="Samsung">Samsung</option>
+  <option value="Xiaomi">Xiaomi</option>
+  <option value="Oppo">OPPO</option>
+  <option value="Realme">Realme</option>
+  <option value="Huawei">Huawei</option>
+  <option value="Google">Google</option>
+  <option value="Asus">Asus</option>
+  <option value="OnePlus">OnePlus</option>
+  <option value="Vivo">Vivo</option>
+  <option value="Motorola">Motorola</option>
+  <option value="Vsmart">Vsmart Ari</option>
+  <option value="Nokia">Nokia</option>
+  <!-- Laptop -->
+  <option value="Dell">Dell</option>
+  <option value="HP">HP</option>
+  <option value="Lenovo">Lenovo</option>
+  <option value="Acer">Acer</option>
+  <option value="MSI">MSI</option>
+  <option value="LG">LG</option>
+  <option value="Microsoft">Microsoft</option>
+  <!-- Đồng hồ -->
+  <option value="Garmin">Garmin</option>
+  <option value="Amazfit">Amazfit</option>
+  <option value="Fitbit">Fitbit</option>
+  <option value="Xiaomi">Xiaomi</option>
+  <!-- Phụ kiện -->
+  <option value="Anker">Anker</option>
+  <option value="Baseus">Baseus</option>
+  <option value="Ugreen">Ugreen</option>
+  <option value="Sony">Sony</option>
+</select>
+
+
+<select id="price">
+  <option value="">Chọn mức giá</option>
+  <option value="duoi-3tr">Dưới 3 triệu</option>
+  <option value="3-5tr">Từ 3 đến 5 triệu</option>
+  <option value="5-7tr">Từ 5 đến 7 triệu</option>
+  <option value="7-10tr">Từ 7 đến 10 triệu</option>
+  <option value="10-20tr">Từ 10 đến 20 triệu</option>
+  <option value="20-30tr">Từ 20 đến 30 triệu</option>
+  <option value="30-40tr">Từ 30 đến 40 triệu</option>
+  <option value="tren-40tr">Trên 40 triệu</option>
+</select>
+
+<select id="feature">
+  <option value="">- Chọn chức năng -</option>
+  <!-- Điện thoại -->
+  <option value="chup-anh-dep">Chụp ảnh đẹp</option>
+  <option value="choi-game">Chơi game</option>
+  <option value="pin-trau">Pin trâu</option>
+  <option value="quay-phim">Quay phim</option>
+  <option value="bo-nho-lon">Bộ nhớ lớn</option>
+  <!-- Laptop & iPad -->
+  <option value="man-hinh-dep">Màn hình đẹp</option>
+  <option value="cam-ung">Cảm ứng</option>
+  <option value="van-phong">Văn phòng</option>
+  <option value="hoc-tap">Học tập</option>
+  <option value="ve">Vẽ</option>
+  <option value="doc-sach">Đọc sách</option>
+  <option value="hieu-nang-cao">Hiệu năng cao</option>
+  <option value="nhe">Nhẹ</option>
+  <!-- Đồng hồ -->
+  <option value="the-thao">Thể thao</option>
+  <option value="suc-khoe">Sức khỏe</option>
+  <option value="do-nhip-tim">Đo nhịp tim</option>
+  <!-- Phụ kiện -->
+  <option value="sac-nhanh">Sạc nhanh</option>
+  <option value="tai-nghe">Tai nghe</option>
+  <option value="cap-sac">Cáp sạc</option>
+</select>
+
+<select id="config">
+  <option value="">- Chọn cấu hình - </option>
+  <!-- Điện thoại -->
+  <option value="snapdragon">Snapdragon</option>
+  <option value="apple-a">Apple A Series</option>
+  <option value="mediatek">MediaTek</option>
+  <!-- Laptop & iPad -->
+  <option value="apple-m1">Apple M1</option>
+  <option value="apple-m2">Apple M2</option>
+  <option value="apple-a12">Apple A12</option>
+  <option value="apple-a13">Apple A13</option>
+  <option value="apple-a14">Apple A14</option>
+  <option value="apple-a15">Apple A15</option>
+  <option value="intel-i5">Intel i5</option>
+  <option value="intel-i7">Intel i7</option>
+  <option value="intel-i9">Intel i9</option>
+</select>
+
+
+
+      <button onclick="filterProducts()">Gợi ý</button>
+    </div>
+
+    <div id="product-list" class="product-list"></div>
+  </div>
+
+  <script src="GoiY.js"></script>
+</body>
+</html>

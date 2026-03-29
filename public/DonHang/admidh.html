@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Cập nhật đơn hàng</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 400px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Admin - Cập nhật đơn hàng</h2>
+    <input type="text" id="buyerName" placeholder="Tên người mua" />
+    <input type="email" id="email" placeholder="Gmail" />
+    <input type="tel" id="phone" placeholder="Số điện thoại" />
+    <input type="text" id="address" placeholder="Địa chỉ" />
+    <input type="text" id="productImage" placeholder="Link ảnh sản phẩm" />
+    <select id="orderStatus">
+        <option value="pending">Đang xử lý</option>
+        <option value="delivering">Đang giao</option>
+        <option value="ontheway">Trên đường đến bạn</option>
+        <option value="shipped">Đã giao</option>
+        <option value="cancelled">Đã hủy</option>
+
+    </select>
+    <button onclick="updateStatus()">Cập nhật</button>
+  </div>
+
+  <script>
+    function updateStatus() {
+      const buyerName = document.getElementById('buyerName').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
+      const productImage = document.getElementById('productImage').value;
+      const status = document.getElementById('orderStatus').value;
+      const time = new Date().toLocaleString();
+
+      if (!buyerName || !email || !phone || !address || !productImage) {
+        alert("Vui lòng nhập đầy đủ thông tin.");
+        return;
+      }
+
+      const data = {
+        buyerName, email, phone, address,
+        productImage, status, updatedAt: time
+      };
+
+      localStorage.setItem('orderNotification', JSON.stringify(data));
+      alert('Cập nhật đơn hàng thành công!');
+    }
+
+    window.onload = () => {
+      const saved = localStorage.getItem('orderNotification');
+      if (saved) {
+        const data = JSON.parse(saved);
+        document.getElementById('buyerName').value = data.buyerName || '';
+        document.getElementById('email').value = data.email || '';
+        document.getElementById('phone').value = data.phone || '';
+        document.getElementById('address').value = data.address || '';
+        document.getElementById('productImage').value = data.productImage || '';
+        document.getElementById('orderStatus').value = data.status || 'pending';
+      }
+    }
+  </script>
+</body>
+</html>

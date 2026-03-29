@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>So sánh điện thoại</title>
+  <link rel="stylesheet" href="SoSanh.css">
+</head>
+<body>
+  <script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+  <!-- <h1>Danh sách điện thoại</h1>
+  <div class="phone-list">
+    <div class="phone-card"
+         data-id="1"
+         data-name="iPhone 14"
+         data-screen="6.1' OLED"
+         data-camera="12MP"
+         data-battery="3279mAh"
+         data-price="999$"
+         data-image="image/ip14.jpg">
+      <img src="image/ip14.jpg" alt="iPhone 14" class="phone-img">
+      <h3>iPhone 14</h3>
+      <button onclick="addToCompare(this)">Thêm vào so sánh</button>
+    </div>
+
+    <div class="phone-card"
+         data-id="2"
+         data-name="Samsung S23"
+         data-screen="6.1' AMOLED"
+         data-camera="50MP"
+         data-battery="3900mAh"
+         data-price="899$"
+         data-image="image/ss.jpg">
+      <img src="image/ss.jpg" alt="Samsung S23" class="phone-img">
+      <h3>Samsung S23</h3>
+      <button onclick="addToCompare(this)">Thêm vào so sánh</button>
+    </div>
+
+    <div class="phone-card"
+         data-id="3"
+         data-name="Xiaomi 13"
+         data-screen="6.36' AMOLED"
+         data-camera="50MP"
+         data-battery="4500mAh"
+         data-price="699$"
+         data-image="image/xaomi.jpg">
+      <img src="image/xaomi.jpg" alt="Xiaomi 13" class="phone-img">
+      <h3>Xiaomi 13</h3>
+      <button onclick="addToCompare(this)">Thêm vào so sánh</button>
+    </div>
+  </div>
+
+  <h2>Bảng so sánh</h2>
+  <div id="compare-table"></div>
+
+  <script src="SoSanh.js"></script> -->
+    
+
+    <main class="container">
+        <section class="comparison-section">
+          <div class="back-button">
+             <button onclick="goBack()">← Về trang chủ</button>
+          </div>
+            <h1>So Sánh Điện Thoại</h1>
+            <p>Chọn hai hoặc ba sản phẩm để so sánh thông số kỹ thuật chi tiết.</p>
+
+            <div class="comparison-selectors">
+                <div class="selector-group">
+                    <label for="phone1">Chọn điện thoại 1:</label>
+                    <select id="phone1">
+                        <option value="">-- Chọn sản phẩm --</option>
+                    </select>
+                </div>
+                <div class="selector-group">
+                    <label for="phone2">Chọn điện thoại 2:</label>
+                    <select id="phone2">
+                        <option value="">-- Chọn sản phẩm --</option>
+                    </select>
+                </div>
+                <div class="selector-group" id="selector-group-3" style="display: none;"> <label for="phone3">Chọn điện thoại 3:</label>
+                    <select id="phone3">
+                        <option value="">-- Chọn sản phẩm --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="comparison-actions">
+                 <button id="compareBtn">So Sánh</button>
+                 <button id="addPhoneBtn">Thêm sản phẩm để so sánh (tối đa 3)</button>
+                 <button id="resetBtn" style="display: none;">Chọn lại</button>
+            </div>
+
+
+            <div id="comparison-results" class="comparison-results-table" style="display:none;">
+                <div id="recommendation-area" style="display:none; margin-top: 30px; padding: 20px; background-color: #e9f5ff; border-radius: 8px; border: 1px solid #b3d7f2;">
+                <h3 style="color: #0056b3; margin-bottom: 15px; text-align:center;">Gợi ý lựa chọn</h3>
+                <div id="recommendation-content">
+                    </div>
+                <p style="font-size: 0.9em; color: #555; margin-top: 15px; text-align: center;">
+                    <em>Lưu ý: Đây là những gợi ý dựa trên thông số kỹ thuật được liệt kê. Lựa chọn tốt nhất sẽ phụ thuộc vào nhu cầu, sở thích và ngân sách cá nhân của bạn. Hãy cân nhắc kỹ trước khi quyết định!</em>
+                </p>
+            </div>
+                <h2>Kết quả so sánh</h2>
+                <table>
+                    <thead>
+                        <tr id="comparison-header-row">
+                            <th>Tính năng</th>
+                            </tr>
+                    </thead>
+                    <tbody id="comparison-body">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-column">
+          <h4>Tổng đài hỗ trợ</h4>
+          <p>Gọi mua: <a href="#">1900 232 460</a> (8:00 - 21:30)</p>
+          <p>Khiếu nại: <a href="#">1800.1062</a> (8:00 - 21:30)</p>
+          <p>Bảo hành: <a href="#">1900 232 464</a> (8:00 - 21:00)</p>
+        </div>
+        <div class="footer-column">
+          <h4>Về công ty</h4>
+          <ul>
+            <li><a href="#">Giới thiệu công ty (MWG.vn)</a></li>
+            <li><a href="#">Tuyển dụng</a></li>
+            <li><a href="#">Gửi góp ý, khiếu nại</a></li>
+            <li><a href="#">Tìm siêu thị (2.958 shop)</a></li>
+          </ul>
+        </div>
+         </div>
+    </footer>
+
+    <script src="SoSanh.js"></script>
+</body>
+</html>

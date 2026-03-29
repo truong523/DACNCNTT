@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản lý sản phẩm</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <h1>Trang Quản Trị</h1>
+  <button onclick="logout()">Đăng xuất</button>
+  <button onclick="goHome()">🏠 Về trang chủ</button>
+  <a href="QLKH.html" class="btn-link">Quản lý khách hàng</a>
+
+  <h2>Thêm / Cập nhật sản phẩm</h2>
+  <div id="product-form">
+    <input type="text" id="product-name" placeholder="Tên sản phẩm">
+    <input type="number" id="product-price" placeholder="Giá sản phẩm">
+    <input type="file" id="product-image" accept="image/*">
+    <textarea id="product-description" placeholder="Nội dung mô tả"></textarea>
+    <input type="number" id="product-discount" placeholder="Giảm giá (%)" min="0" max="100">
+    
+    <button id="add-button" onclick="addProduct()">Thêm sản phẩm</button>
+    <button id="update-button" onclick="updateProduct()" style="display: none;">Cập nhật sản phẩm</button>
+  </div>
+
+  <h2>Danh sách sản phẩm</h2>
+  <div id="admin-product-list"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
